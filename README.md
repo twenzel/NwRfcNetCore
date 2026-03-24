@@ -1,5 +1,10 @@
 # .NET client library for SAP NetWeaver RFC
+
 An easy way of making SAP RFC calls from .NET. Libray is supported in Windows, Linux and macOS.
+
+[![NuGet](https://img.shields.io/nuget/v/NwRfcNetCore.svg)](https://nuget.org/packages/NwRfcNetCore/)
+[![License](https://img.shields.io/badge/license-APACHE%202.0-blue.svg)](LICENSE)
+[![Build Status](https://github.com/twenzel/NwRfcNetCore/actions/workflows/dotnet.yml/badge.svg)](https://github.com/twenzel/NwRfcNetCore/actions/workflows/dotnet.yml)
 
 ## Supported Platforms & Prerequisites
 
@@ -18,7 +23,7 @@ An easy way of making SAP RFC calls from .NET. Libray is supported in Windows, L
 Add the package using the `dotnet` cli:
 
 ```
-$ dotnet add package NwRfcNet
+$ dotnet add package NwRfcNetCore
 ```
 
 Create a class to match SAP RFC parameters
