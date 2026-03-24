@@ -4,7 +4,7 @@
 		<TargetFrameworks>net9.0;net10.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<RootNamespace>NwRfcNetCore</RootNamespace>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Authors>Nuno Maia;Toni Wenzel</Authors>
 		<Description>An easy way of making SAP RFC calls from .NET Core (Windows, Linux and macOS )</Description>
 		<PackageTags>sap rfc bapi</PackageTags>
@@ -14,7 +14,7 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<PackageIcon>NwRfcNetCore.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<PackageOutputPath>..\..\nupkgs</PackageOutputPath>
 	</PropertyGroup>
 
 	<ItemGroup>
