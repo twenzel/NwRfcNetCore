@@ -26,16 +26,21 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 10.0.x
-        
-    - name: Git Version
-      id: version
-      uses: codacy/git-version@2.7.1
+
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v4.4.2
+      with:
+          versionSpec: '6.7.x'
+    
+    - name: Use GitVersion
+      id: gitversion # step id used as reference for output values
+      uses: gittools/actions/gitversion/execute@vv4.4.2
 
         
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore /p:Version=${{steps.version.outputs.version}} /p:PackageVersion=${{steps.version.outputs.version}}      
+      run: dotnet build --no-restore /p:Version=${{steps.gitversion.outputs.semVer}} /p:PackageVersion=${{steps.gitversion.outputs.semVer}}
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: upload nuget package
