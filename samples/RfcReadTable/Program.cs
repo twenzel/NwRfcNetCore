@@ -1,8 +1,7 @@
-﻿using CommandLine;
+﻿using System;
+using CommandLine;
 using NwRfcNet;
-using NwRfcNet.Bapi;
 using NwRfcNet.TypeMapper;
-using System;
 
 namespace Sample.RfcReadTable
 {
@@ -61,7 +60,7 @@ namespace Sample.RfcReadTable
                 .Property(x => x.Data)
                 .HasParameterName("DATA")
                 .HasParameterType(RfcFieldType.Table);
-            
+
             mapper.Parameter<DataTable>()
                 .Property(x => x.Wa)
                 .HasParameterName("WA")
@@ -98,7 +97,7 @@ namespace Sample.RfcReadTable
                                        RowCount = 0,
                                        RowSkips = 0
                                    };
-                                    
+
                                    func.Invoke(inParams);
 
                                    var result = func.GetOutputParameters<RfcParametersOutput>();
@@ -107,8 +106,8 @@ namespace Sample.RfcReadTable
                                    {
                                        Console.WriteLine("No Data");
                                    }
-                                   
-                                   foreach(var r in result.Data)
+
+                                   foreach (var r in result.Data)
                                    {
                                        Console.WriteLine(r.Wa);
                                    }
@@ -118,7 +117,7 @@ namespace Sample.RfcReadTable
                        catch (Exception ex)
                        {
                            Console.WriteLine(ex.Message);
-                           throw ex;
+                           throw;
                        }
                    });
 

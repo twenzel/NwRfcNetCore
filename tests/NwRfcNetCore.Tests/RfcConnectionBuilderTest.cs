@@ -62,7 +62,7 @@ namespace NwRfcNet.Tests
                 .UseSecureNetworkCommunicationMode(sncMode);
 
             var rfcParms = builder.Build().Parameters;
-            Assert.Equal(1, rfcParms.Count);
+            Assert.Single(rfcParms);
             Assert.Contains(rfcParms, r => r.Key == "snc_mode" && r.Value == sncMode);
         }
 
@@ -89,7 +89,7 @@ namespace NwRfcNet.Tests
                 .UseSecureNetworkCommunicationQop(sncQop);
 
             var rfcParms = builder.Build().Parameters;
-            Assert.Equal(1, rfcParms.Count);
+            Assert.Single(rfcParms);
             Assert.Contains(rfcParms, r => r.Key == "snc_qop" && r.Value == sncQop);
         }
 

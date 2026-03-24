@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/BapiCompanyList/BapiCompanyList.csproj" />
+    <Project Path="samples/BapiCustomerDetail/BapiCustomerDetail.csproj" />
+    <Project Path="samples/BapiCustomerList/BapiCustomerList.csproj" />
+    <Project Path="samples/BapiGetGlAccountBalance/BapiGetGlAccountBalance.csproj" />
+    <Project Path="samples/RfcConnections/RfcConnections.csproj" />
+    <Project Path="samples/RfcReadTable/RfcReadTable.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/NwRfcNetCore/NwRfcNetCore.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="tests/NwRfcNetCore.Tests/NwRfcNetCore.Tests.csproj" />
+  </Folder>
+</Solution>

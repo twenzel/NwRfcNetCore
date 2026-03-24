@@ -1,8 +1,8 @@
-﻿using CommandLine;
+﻿using System;
+using CommandLine;
 using NwRfcNet;
 using NwRfcNet.Bapi;
 using NwRfcNet.TypeMapper;
-using System;
 
 namespace Sample.BapiGetGlAccountBalance
 {
@@ -166,7 +166,7 @@ namespace Sample.BapiGetGlAccountBalance
                        catch (Exception ex)
                        {
                            Console.WriteLine(ex.Message);
-                           throw ex;
+                           throw;
                        }
                    });
 

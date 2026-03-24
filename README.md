@@ -3,9 +3,7 @@ An easy way of making SAP RFC calls from .NET. Libray is supported in Windows, L
 
 ## Supported Platforms & Prerequisites
 
-* Requires .NET Framework ( [.NET Standard 2.0](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) or higher ) 
-  -  .NET Framework 4.6.1 or higher
-  -  .NET Core 2.0 or higher
+* Requires .NET 9 (or higher)
 
 * OS versions
   - Windows x64.
@@ -134,3 +132,7 @@ Example : Server=server_name;lang=en;user=testUser;pwd=secret
 | Snc Mode          | "snc_mode", "sncmode", "UseSnc", "snc"                                |
 |  Snc Qop          | "snc_partnername", "sncpartnername", "snc_partner", "sncpartner"      |
 | Snc Lib           | "snc_library", "snc_lib", "snclib"                                    |
+
+## Credits
+
+The package icon was made by [Vectors Market](https://www.flaticon.com/authors/vectors-market) and is licensed by the [Flaticons license](https://www.flaticon.com/legal).

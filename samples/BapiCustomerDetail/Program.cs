@@ -1,7 +1,7 @@
-﻿using CommandLine;
+﻿using System;
+using CommandLine;
 using NwRfcNet;
 using NwRfcNet.TypeMapper;
-using System;
 
 namespace Sample.BapiCustomerDetail
 {
@@ -85,14 +85,14 @@ namespace Sample.BapiCustomerDetail
                                conn.Open();
                                using (var func = conn.CallRfcFunction("BAPI_CUSTOMER_GETDETAIL2"))
                                {
-                                   var inParams = new CustomerDataInput{ Customer = o.Customer };
+                                   var inParams = new CustomerDataInput { Customer = o.Customer };
                                    func.Invoke(inParams);
 
                                    var result = func.GetOutputParameters<CustomerDataOutput>();
 
                                    Console.WriteLine(String.Format("|{0,-20}|{1,-20}|{2,-20}|{3,-20}", "Customer Number", "Create Date", "Confirm Date", "Confirm Time"));
 
-                                   Console.WriteLine(String.Format("|{0,-20}|{1,-20}|{2,-20}|{3,-20}", 
+                                   Console.WriteLine(String.Format("|{0,-20}|{1,-20}|{2,-20}|{3,-20}",
                                        result.Detail.Customer,
                                        result.Detail.CreateDate?.ToString("yyyy-MM-dd") ?? "Not Defined",
                                        result.Detail?.ConfirmDate?.ToString("yyyy-MM-dd") ?? "Not Defined",
@@ -104,7 +104,7 @@ namespace Sample.BapiCustomerDetail
                        catch (Exception ex)
                        {
                            Console.WriteLine(ex.Message);
-                           throw ex;
+                           throw;
                        }
                    });
         }

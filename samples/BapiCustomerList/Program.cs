@@ -1,7 +1,7 @@
-﻿using CommandLine;
+﻿using System;
+using CommandLine;
 using NwRfcNet;
 using NwRfcNet.TypeMapper;
-using System;
 
 namespace Sample.BapiCustomerList
 {
@@ -74,8 +74,8 @@ namespace Sample.BapiCustomerList
             Parser.Default.ParseArguments<Options>(args)
                    .WithParsed<Options>(o =>
                    {
-                        try
-                        {
+                       try
+                       {
                            ParameterMapping();
 
                            var version = RfcConnection.GetLibVersion();
@@ -101,12 +101,12 @@ namespace Sample.BapiCustomerList
                            {
                                Console.WriteLine(String.Format("|{0,-20}|{1,-10}", row.CustomerId, row.Name));
                            }
-                       } 
-                        catch (Exception ex) 
-                        {
-                            Console.WriteLine(ex.Message);
-                            throw ex;
-                        } 
+                       }
+                       catch (Exception ex)
+                       {
+                           Console.WriteLine(ex.Message);
+                           throw;
+                       }
                    });
         }
     }
