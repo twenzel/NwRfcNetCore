@@ -1,59 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace NwRfcNet
+namespace NwRfcNetCore;
+
+internal class RfcConnectionParameters : IRfcConnectionParameters
 {
-    internal class RfcConnectionParameters : IRfcConnectionParameters
-    {
-        public const string DefaultUserNameParameterKey = "user";
-        public const string DefaultPasswordParameterKey = "passwd";
-        public const string DefaultHostParameterKey = "ASHOST";
-        public const string DefaultClientParameterKey = "client";
+	public const string DEFAULT_USER_NAME_PARAMETER_KEY = "user";
+	public const string DEFAULT_PASSWORD_PARAMETER_KEY = "passwd";
+	public const string DEFAULT_HOST_PARAMETER_KEY = "ASHOST";
+	public const string DEFAULT_CLIENT_PARAMETER_KEY = "client";
 
-        public const string DefaultSystemNumberKey = "sysnr";
-        public const string DefaultSystemIdKey = "SYSID";
-        public const string DefaultConnectionNameParameterKey = "name";
-        public const string DefaultConnectionLanguageParameterKey = "lang";
-        public const string DefaultTraceParameterKey = "trace";
-        public const string DefaultConnectionPoolSizeParameterKey = "POOL_SIZE";
-        public const string DefaultSapRouterParameterKey = "saprouter";
+	public const string DEFAULT_SYSTEM_NUMBER_KEY = "sysnr";
+	public const string DEFAULT_SYSTEM_ID_KEY = "SYSID";
+	public const string DEFAULT_CONNECTION_NAME_PARAMETER_KEY = "name";
+	public const string DEFAULT_CONNECTION_LANGUAGE_PARAMETER_KEY = "lang";
+	public const string DEFAULT_TRACE_PARAMETER_KEY = "trace";
+	public const string DEFAULT_CONNECTION_POOL_SIZE_PARAMETER_KEY = "POOL_SIZE";
+	public const string DEFAULT_SAP_ROUTER_PARAMETER_KEY = "saprouter";
 
-        public const string DefaultSncQopParameterKey = "snc_qop";
-        public const string DefaultSncMyNameParameterKey = "snc_myname";
-        public const string DefaultSncPartnerNameParameterKey = "snc_partnername";
-        public const string DefaultSncLibParameterKey = "snc_lib";
-        public const string DefaultSncModeParameterKey = "snc_mode";
+	public const string DEFAULT_SNC_QOP_PARAMETER_KEY = "snc_qop";
+	public const string DEFAULT_SNC_MY_NAME_PARAMETER_KEY = "snc_myname";
+	public const string DEFAULT_SNC_PARTNER_NAME_PARAMETER_KEY = "snc_partnername";
+	public const string DEFAULT_SNC_LIB_PARAMETER_KEY = "snc_lib";
+	public const string DEFAULT_SNC_MODE_PARAMETER_KEY = "snc_mode";
 
-        private readonly IDictionary<string, string> connectionParameters;
+	private readonly IDictionary<string, string> _connectionParameters;
 
-        public RfcConnectionParameters() => 
-            connectionParameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+	public RfcConnectionParameters() =>
+		_connectionParameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-        public IReadOnlyDictionary<string, string> Parameters => 
-            new ReadOnlyDictionary<string, string>(connectionParameters);
+	public IReadOnlyDictionary<string, string> Parameters =>
+		new ReadOnlyDictionary<string, string>(_connectionParameters);
 
-        public RfcConnectionParameters SetParameter(string key, string value)
-        {
-            if (key is null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
+	public RfcConnectionParameters SetParameter(string key, string value)
+	{
+		ArgumentNullException.ThrowIfNull(key);
+		ArgumentNullException.ThrowIfNull(value);
 
-            if (value is null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
+		if (!_connectionParameters.ContainsKey(key))
+			_connectionParameters.Add(key, value);
+		else
+			_connectionParameters[key] = value;
 
-            if (!connectionParameters.ContainsKey(key))
-            {
-                connectionParameters.Add(key, value);
-            }
-            else
-            {
-                connectionParameters[key] = value;
-            }
-            return this;
-        }
-    }
+		return this;
+	}
 }

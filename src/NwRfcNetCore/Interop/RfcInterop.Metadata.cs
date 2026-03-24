@@ -1,11 +1,9 @@
-using System;
 using System.Runtime.InteropServices;
 
-namespace NwRfcNet.Interop
+namespace NwRfcNetCore.Interop;
+
+internal static partial class RfcInterop
 {
-    internal static partial class RfcInterop
-    {
-        [DllImport(NwRfcLib, CharSet = CharSet.Unicode)]
-        public static extern IntPtr RfcGetFunctionDesc(IntPtr rfcHandle, string funcName, out RFC_ERROR_INFO errorInfo);
-    }    
+	[DllImport(NW_RFC_LIB, CharSet = CharSet.Unicode)]
+	public static extern IntPtr RfcGetFunctionDesc(IntPtr rfcHandle, string funcName, out RFC_ERROR_INFO errorInfo);
 }

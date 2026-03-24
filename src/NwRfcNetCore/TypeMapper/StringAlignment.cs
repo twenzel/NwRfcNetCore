@@ -1,9 +1,8 @@
-﻿namespace NwRfcNet.TypeMapper
+namespace NwRfcNetCore.TypeMapper;
+
+public enum StringAlignment
 {
-    public enum StringAlignment
-    {
-        None,
-        Left,
-        Right
-    }
+	None,
+	Left,
+	Right
 }

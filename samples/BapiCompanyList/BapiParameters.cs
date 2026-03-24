@@ -1,14 +1,13 @@
-﻿namespace Sample.BapiCompanyList
+namespace Sample.BapiCompanyList;
+
+public class BapiCompanyOutputParameters
 {
-    public class BapiCompanyOutputParameters
-    {
-        public CompanyDetails[] Details { get; set; }
-    }
+	public CompanyDetails[] Details { get; set; }
+}
 
-    public class CompanyDetails
-    {
-        public string CompanyCode { get; set; }
+public class CompanyDetails
+{
+	public string CompanyCode { get; set; }
 
-        public string Name { get; set; }
-    }
+	public string Name { get; set; }
 }

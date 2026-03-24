@@ -1,9 +1,6 @@
-﻿using System;
+namespace NwRfcNetCore.RfcTypes;
 
-namespace NwRfcNet.RfcTypes
+internal interface IRfcType<T>
 {
-    internal interface IRfcType<T>
-    {
-        T RfcValue { get; }
-    }
+	T RfcValue { get; }
 }

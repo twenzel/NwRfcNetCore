@@ -14,6 +14,7 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<PackageIcon>NwRfcNetCore.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -23,6 +24,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="NwRfcNetCore.Tests"/>
+		<InternalsVisibleTo Include="NwRfcNetCore.Tests" />
 	</ItemGroup>
 </Project>

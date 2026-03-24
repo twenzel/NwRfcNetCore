@@ -1,50 +1,40 @@
-﻿using System;
 using System.Globalization;
 
-namespace NwRfcNet.RfcTypes
+namespace NwRfcNetCore.RfcTypes;
+
+public class RfcBcd : IRfcType<decimal>
 {
-    public class RfcBcd : IRfcType<decimal>
-    {
-        #region Constructors
+	public RfcBcd(decimal value) => RfcValue = value;
 
-        public RfcBcd(decimal value) => RfcValue = value;
+	public RfcBcd(string value) => RfcValue = decimal.Parse(value, CultureInfo.InvariantCulture);
 
-        public RfcBcd(string value) => RfcValue = decimal.Parse(value, CultureInfo.InvariantCulture);
+	public decimal RfcValue { get; }
 
-        #endregion
+	public override string ToString() => RfcValue.ToString(CultureInfo.InvariantCulture);
 
-        #region Properties
+	#region Interop
 
-        public decimal RfcValue { get; }
+	/// <summary>
+	/// sets the value of a RFC INT8 field
+	/// </summary>
+	/// <param name="dataHandle">handle to container</param>
+	/// <param name="name">field name</param>
+	internal void SetFieldValue(IntPtr dataHandle, string name)
+	{
+		var str = new RfcString(RfcValue.ToString());
+		str.SetFieldValue(dataHandle, name);
+	}
 
-        #endregion
-
-        public override string ToString() => RfcValue.ToString(CultureInfo.InvariantCulture);
-
-        #region Interop
-
-        /// <summary>
-        /// sets the value of a RFC INT8 field
-        /// </summary>
-        /// <param name="dataHandle">handle to container</param>
-        /// <param name="name">field name</param>
-        internal void SetFieldValue(IntPtr dataHandle, string name)
-        {
-            var str = new RfcString(RfcValue.ToString());
-            str.SetFieldValue(dataHandle, name);
-        }
-
-        /// <summary>
-        /// Gets the value of a RFC INT8 field
-        /// </summary>
-        /// <param name="dataHandle">handle to container</param>
-        /// <param name="name">field name</param>
-        /// <returns></returns>
-        internal static RfcBcd GetFieldValue(IntPtr dataHandle, string name)
-        {
-            var str = RfcString.GetFieldValue(dataHandle, name);
-            return new RfcBcd(str.RfcValue);
-        }
-        #endregion        
-    }
+	/// <summary>
+	/// Gets the value of a RFC INT8 field
+	/// </summary>
+	/// <param name="dataHandle">handle to container</param>
+	/// <param name="name">field name</param>
+	/// <returns></returns>
+	internal static RfcBcd GetFieldValue(IntPtr dataHandle, string name)
+	{
+		var str = RfcString.GetFieldValue(dataHandle, name);
+		return new RfcBcd(str.RfcValue);
+	}
+	#endregion
 }
