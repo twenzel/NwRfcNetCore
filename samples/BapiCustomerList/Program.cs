@@ -81,16 +81,13 @@ class Program
 					   var version = RfcConnection.GetLibVersion();
 					   Console.WriteLine($"currently loaded sapnwrfc library version : Major {version.MajorVersion}, Minor {version.MinorVersion}, patchLevel {version.PatchLevel}");
 
-					   using var conn = new RfcConnection(o.Connection);
+					   using var conn = RfcConnection.FromConnectionString(o.Connection);
 					   conn.Open();
 					   using var func = conn.CallRfcFunction("BAPI_CUSTOMER_GETLIST");
 					   var inParams = new ListCustomersInputParameters
 					   {
 						   MaxRows = 10,
-						   Range =
-[
-											new IdRange() {   Sign = "I", Option = "BT", High = "ZZZZZZZZZZ" }
-]
+						   Range = [new IdRange() { Sign = "I", Option = "BT", High = "ZZZZZZZZZZ" }]
 					   };
 
 					   func.Invoke(inParams);

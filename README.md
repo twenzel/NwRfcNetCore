@@ -26,6 +26,12 @@ Add the package using the `dotnet` cli:
 $ dotnet add package NwRfcNetCore
 ```
 
+or 
+
+```
+$ dotnet add package NwRfcNetCore.Hosting
+```
+
 Create a class to match SAP RFC parameters
 
 ```C#
@@ -65,7 +71,7 @@ Map RFC mapameters to class
 Open a connection to server and invoke a BAPI 
 
 ```C#
-    using (var conn = new RfcConnection(builder => builder
+    using (var conn = RfcConnection.FromBuilder(builder => builder
         .UseConnectionHost("hostname")
         .UseLogonUserName("user")
         .UseLogonPassword("password")
@@ -82,7 +88,7 @@ Open a connection to server and invoke a BAPI
 or 
 
 ```C#
-    using (var conn = new RfcConnection("Server=server_name;lang=en;user=testUser;pwd=secret"))
+    using (var conn = RfcConnection.FromConnectionString("Server=server_name;lang=en;user=testUser;pwd=secret"))
     {
         conn.Open();
         using(var func = _conn.CallRfcFunction("BAPI_COMPANYCODE_GETLIST"))

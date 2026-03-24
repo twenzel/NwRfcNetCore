@@ -8,6 +8,7 @@
     <Project Path="samples/RfcReadTable/RfcReadTable.csproj" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="src/NwRfcNetCore.Hosting/NwRfcNetCore.Hosting.csproj" Id="e1d700c6-2926-4649-920f-e7a300a9473f" />
     <Project Path="src/NwRfcNetCore/NwRfcNetCore.csproj" />
   </Folder>
   <Folder Name="/test/">

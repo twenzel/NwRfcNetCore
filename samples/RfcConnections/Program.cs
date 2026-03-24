@@ -32,37 +32,32 @@ class Program
 				   /**
 					* Use the connection builder fluent api.
 					*/
-				   using (var conn = new RfcConnection(builder => builder
+				   using var conn = RfcConnection.FromBuilder(builder => builder
 						.UseConnectionHost(o.Hostname)
 						.UseLogonUserName(o.UserName)
 						.UseLogonPassword(o.Password)
-						.UseLogonClient(o.Client)))
-				   {
-					   conn.Open();
-					   conn.Ping();
-					   // do something more interesting here...
-				   }
+						.UseLogonClient(o.Client));
 
+				   conn.Open();
+				   conn.Ping();
+				   // do something more interesting here...
 
 				   /**
 					* Use the connection string api.
 					*/
-				   using (var conn = new RfcConnection(connectionString: $"Server={o.Hostname}; Uid={o.UserName}; Passwd={o.Password}; Client={o.Client}"))
-				   {
-					   conn.Open();
-					   conn.Ping();
-					   // do something more interesting here...
-				   }
+				   using var conn2 = RfcConnection.FromConnectionString($"Server={o.Hostname}; Uid={o.UserName}; Passwd={o.Password}; Client={o.Client}");
+				   conn2.Open();
+				   conn2.Ping();
+				   // do something more interesting here...
+
 
 				   /**
 					* Use the connection uri api.
 					*/
-				   using (var conn = new RfcConnection(connectionUri: new Uri($"sap://user={Uri.EscapeDataString(o.UserName)};passwd={Uri.EscapeDataString(o.Password)};client={o.Client}@A/{o.Hostname}")))
-				   {
-					   conn.Open();
-					   conn.Ping();
-					   // do something more interesting here...
-				   }
+				   using var conn3 = RfcConnection.FromUri(new Uri($"sap://user={Uri.EscapeDataString(o.UserName)};passwd={Uri.EscapeDataString(o.Password)};client={o.Client}@A/{o.Hostname}"));
+				   conn3.Open();
+				   conn3.Ping();
+				   // do something more interesting here...				   
 
 			   });
 	}

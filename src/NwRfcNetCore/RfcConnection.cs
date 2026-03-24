@@ -12,62 +12,14 @@ public sealed class RfcConnection : IDisposable
 	private readonly IRfcConnectionParameters _options;
 
 	/// <summary>
-	/// Creates a new <see cref="RfcConnection"/> with parameters out of a dictionary.
+	/// Creates a new <see cref="RfcConnection"/> with parameters created using a <see cref="RfcConnectionParameterBuilder"/>.
 	/// </summary>
 	/// <param name="connectionParameters">The connection parameters.</param>
-	public RfcConnection(IDictionary<string, string> connectionParameters)
+	public RfcConnection(IRfcConnectionParameters connectionParameters)
 	{
 		ArgumentNullException.ThrowIfNull(connectionParameters);
 
-		_options = new RfcConnectionParameterBuilder().FromDictionary(connectionParameters).Build();
-	}
-
-	/// <summary>
-	/// Creates a new <see cref="RfcConnection"/> with parameters out of an uri (must be in form 'sap://[userName]:[password]@[host]?client=..&amp;system_number=...').
-	/// </summary>
-	/// <param name="connectionUri">The connection uri.</param>
-	public RfcConnection(Uri connectionUri)
-	{
-		ArgumentNullException.ThrowIfNull(connectionUri);
-
-		_options = new RfcConnectionParameterBuilder().FromConnectionUri(connectionUri).Build();
-	}
-
-	/// <summary>
-	/// Creates a new <see cref="RfcConnection"/> with parameters out of a connection string (must be in form 'Server=[host]; UserName=[userName]; Password=[password]; Client=[Client]...').
-	/// </summary>
-	/// <param name="connectionString">The connection string.</param>
-	public RfcConnection(string connectionString)
-	{
-		ArgumentNullException.ThrowIfNull(connectionString);
-
-		_options = new RfcConnectionParameterBuilder()
-				.FromConnectionString(connectionString)
-				.Build();
-	}
-
-	/// <summary>
-	/// Creates a new <see cref="RfcConnection"/> with parameters created using a <see cref="RfcConnectionParameterBuilder"/>.
-	/// </summary>
-	/// <param name="builder">The connection parameter builder action.</param>
-	public RfcConnection(Action<RfcConnectionParameterBuilder> builder)
-	{
-		ArgumentNullException.ThrowIfNull(builder);
-
-		var builderInstance = new RfcConnectionParameterBuilder();
-		builder(builderInstance);
-		_options = builderInstance.Build();
-	}
-
-	/// <summary>
-	/// Creates a new <see cref="RfcConnection"/> with parameters created using a <see cref="RfcConnectionParameterBuilder"/>.
-	/// </summary>
-	/// <param name="builder">The connection parameter builder.</param>
-	public RfcConnection(RfcConnectionParameterBuilder builder)
-	{
-		ArgumentNullException.ThrowIfNull(builder);
-
-		_options = builder.Build();
+		_options = connectionParameters;
 	}
 
 	/// <summary>
@@ -206,7 +158,60 @@ public sealed class RfcConnection : IDisposable
 		return rfcParams.ToArray();
 	}
 
+	/// <summary>
+	/// Creates a new <see cref="RfcConnection"/> with parameters out of a dictionary.
+	/// </summary>
+	/// <param name="connectionParameters">The connection parameters.</param>
+	public static RfcConnection FromDictionary(IDictionary<string, string> connectionParameters)
+	{
+		ArgumentNullException.ThrowIfNull(connectionParameters);
 
+		return new(new RfcConnectionParameterBuilder().FromDictionary(connectionParameters).Build());
+	}
+
+	/// <summary>
+	/// Creates a new <see cref="RfcConnection"/> with parameters out of an uri (must be in form 'sap://[userName]:[password]@[host]?client=..&amp;system_number=...').
+	/// </summary>
+	/// <param name="connectionUri">The connection uri.</param>
+	public static RfcConnection FromUri(Uri connectionUri)
+	{
+		ArgumentNullException.ThrowIfNull(connectionUri);
+
+		return new(new RfcConnectionParameterBuilder().FromConnectionUri(connectionUri).Build());
+	}
+
+	/// <summary>
+	/// Creates a new <see cref="RfcConnection"/> with parameters out of a connection string (must be in form 'Server=[host]; UserName=[userName]; Password=[password]; Client=[Client]...').
+	/// </summary>
+	/// <param name="connectionString">The connection string.</param>
+	public static RfcConnection FromConnectionString(string connectionString)
+	{
+		ArgumentNullException.ThrowIfNull(connectionString);
+
+		return new(new RfcConnectionParameterBuilder().FromConnectionString(connectionString).Build());
+	}
+
+	/// <summary>
+	/// Creates a new <see cref="RfcConnection"/> with parameters created using a <see cref="RfcConnectionParameterBuilder"/>.
+	/// </summary>
+	/// <param name="builder">The connection parameter builder action.</param>
+	public static RfcConnection FromBuilder(Action<RfcConnectionParameterBuilder> builder)
+	{
+		ArgumentNullException.ThrowIfNull(builder);
+
+		var builderInstance = new RfcConnectionParameterBuilder();
+		builder(builderInstance);
+		return FromBuilder(builderInstance);
+	}
+
+	/// <summary>
+	/// Creates a new <see cref="RfcConnection"/> with parameters created using a <see cref="RfcConnectionParameterBuilder"/>.
+	/// </summary>
+	/// <param name="builder">The connection parameter builder.</param>
+	public static RfcConnection FromBuilder(RfcConnectionParameterBuilder builder)
+	{
+		return new(builder.Build());
+	}
 }
 
 /// <summary>

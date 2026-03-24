@@ -23,7 +23,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="NwRfcNetCore.Tests" />
-		<InternalsVisibleTo Include="NwRfcNetCore.Hosting" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
 	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NwRfcNetCore\NwRfcNetCore.csproj" />
+  </ItemGroup>
+
 </Project>

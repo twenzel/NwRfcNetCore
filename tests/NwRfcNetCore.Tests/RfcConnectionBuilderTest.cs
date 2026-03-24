@@ -26,7 +26,7 @@ public class RfcConnectionBuilderTest
 	[Fact]
 	public void TestConnectionString()
 	{
-		var connection = new RfcConnection(connectionString: "Server=server_name; lang=en; user=testUser;pwd=secret");
+		using var connection = RfcConnection.FromConnectionString("Server=server_name; lang=en; user=testUser;pwd=secret");
 
 		var rfcParms = connection.ConnectionParameters;
 		Assert.Equal(4, rfcParms.Count);
@@ -40,7 +40,7 @@ public class RfcConnectionBuilderTest
 	[Fact]
 	public void TestConnectionUri()
 	{
-		var connection = new RfcConnection(connectionUri: new Uri($"sap://user=testUser;pass=secret;l=EN;cl=001@A/test_server?rfcsdktrace=ON"));
+		using var connection = RfcConnection.FromUri(new Uri($"sap://user=testUser;pass=secret;l=EN;cl=001@A/test_server?rfcsdktrace=ON"));
 
 		var rfcParms = connection.ConnectionParameters;
 		Assert.Equal(6, rfcParms.Count);

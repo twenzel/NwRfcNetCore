@@ -129,7 +129,7 @@ class Program
 					   var version = RfcConnection.GetLibVersion();
 					   Console.WriteLine($"currently loaded sapnwrfc library version : Major {version.MajorVersion}, Minor {version.MinorVersion}, patchLevel {version.PatchLevel}");
 
-					   using var conn = new RfcConnection(builder => builder
+					   using var conn = RfcConnection.FromBuilder(builder => builder
 							.UseConnectionHost(o.Hostname)
 							.UseLogonUserName(o.UserName)
 							.UseLogonPassword(o.Password)

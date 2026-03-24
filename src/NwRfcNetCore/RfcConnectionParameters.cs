@@ -2,7 +2,10 @@ using System.Collections.ObjectModel;
 
 namespace NwRfcNetCore;
 
-internal class RfcConnectionParameters : IRfcConnectionParameters
+/// <summary>
+/// Base implementation of te connection parameters
+/// </summary>
+public class RfcConnectionParameters : IRfcConnectionParameters
 {
 	public const string DEFAULT_USER_NAME_PARAMETER_KEY = "user";
 	public const string DEFAULT_PASSWORD_PARAMETER_KEY = "passwd";
@@ -23,10 +26,7 @@ internal class RfcConnectionParameters : IRfcConnectionParameters
 	public const string DEFAULT_SNC_LIB_PARAMETER_KEY = "snc_lib";
 	public const string DEFAULT_SNC_MODE_PARAMETER_KEY = "snc_mode";
 
-	private readonly IDictionary<string, string> _connectionParameters;
-
-	public RfcConnectionParameters() =>
-		_connectionParameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+	protected readonly Dictionary<string, string> _connectionParameters = new(StringComparer.OrdinalIgnoreCase);
 
 	public IReadOnlyDictionary<string, string> Parameters =>
 		new ReadOnlyDictionary<string, string>(_connectionParameters);
@@ -36,10 +36,7 @@ internal class RfcConnectionParameters : IRfcConnectionParameters
 		ArgumentNullException.ThrowIfNull(key);
 		ArgumentNullException.ThrowIfNull(value);
 
-		if (!_connectionParameters.ContainsKey(key))
-			_connectionParameters.Add(key, value);
-		else
-			_connectionParameters[key] = value;
+		_connectionParameters[key] = value;
 
 		return this;
 	}
