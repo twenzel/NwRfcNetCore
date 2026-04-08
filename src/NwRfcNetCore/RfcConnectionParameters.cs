@@ -11,6 +11,7 @@ public class RfcConnectionParameters : IRfcConnectionParameters
 	public const string DEFAULT_PASSWORD_PARAMETER_KEY = "passwd";
 	public const string DEFAULT_HOST_PARAMETER_KEY = "ASHOST";
 	public const string DEFAULT_CLIENT_PARAMETER_KEY = "client";
+	public const string DEFAULT_DESTINATION_PARAMETER_KEY = "DEST";
 
 	public const string DEFAULT_SYSTEM_NUMBER_KEY = "sysnr";
 	public const string DEFAULT_SYSTEM_ID_KEY = "SYSID";

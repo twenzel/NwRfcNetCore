@@ -104,6 +104,15 @@ public class RfcConnectionParameterBuilder
 	  SetParameter(key, systemId);
 
 	/// <summary>
+	/// Sets the destination for the RFC connection.
+	/// </summary>
+	/// <param name="destination">The destination.</param>
+	/// <param name="key">The key for the parameter.</param>
+	/// <returns>The connection parameter builder.</returns>
+	public RfcConnectionParameterBuilder UseDestination(string destination, string key = RfcConnectionParameters.DEFAULT_DESTINATION_PARAMETER_KEY) =>
+	  SetParameter(key, destination);
+
+	/// <summary>
 	/// Sets the trace state of the connection (This must be 'true/false', '0/1', 'On/Off', 'enabled/disabled', 'yes/no').
 	/// </summary>
 	/// <param name="trace">The trace activation state of the connection.</param>
